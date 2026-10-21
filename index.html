@@ -1,0 +1,1197 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BERKAS KASUS-001 | Investigasi Misteri MBG</title>
+  <style>
+    :root {
+      --bg-main: #090b10;
+      --bg-card: #121620;
+      --bg-card-alt: #181d2a;
+      --border: #262f45;
+      --accent: #e11d48;
+      --accent-soft: rgba(225, 29, 72, 0.15);
+      --gold: #f59e0b;
+      --gold-soft: rgba(245, 158, 11, 0.15);
+      --emerald: #10b981;
+      --text-main: #e2e8f0;
+      --text-muted: #94a3b8;
+      --font-mono: 'Courier New', Courier, monospace;
+      --font-sans: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg-main);
+      background-image: 
+        radial-gradient(circle at 15% 15%, rgba(225, 29, 72, 0.08) 0%, transparent 35%),
+        radial-gradient(circle at 85% 85%, rgba(245, 158, 11, 0.06) 0%, transparent 35%);
+      color: var(--text-main);
+      font-family: var(--font-sans);
+      line-height: 1.65;
+      min-height: 100vh;
+      padding-bottom: 60px;
+    }
+
+    /* Header / Topbar */
+    header {
+      border-bottom: 1px solid var(--border);
+      background: rgba(9, 11, 16, 0.92);
+      backdrop-filter: blur(10px);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      padding: 16px 20px;
+    }
+
+    .header-inner {
+      max-width: 1050px;
+      margin: 0 auto;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .badge-classified {
+      background: var(--accent);
+      color: #fff;
+      font-family: var(--font-mono);
+      font-weight: 700;
+      font-size: 0.75rem;
+      padding: 4px 8px;
+      border-radius: 4px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      animation: pulse 2.5s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.65; }
+    }
+
+    .brand h1 {
+      font-size: 1.15rem;
+      font-family: var(--font-mono);
+      letter-spacing: 1px;
+      color: #fff;
+    }
+
+    /* Navigation Tabs */
+    .nav-tabs {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .tab-btn {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+      padding: 8px 14px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 0.88rem;
+      font-weight: 600;
+      transition: all 0.2s ease;
+    }
+
+    .tab-btn:hover {
+      border-color: var(--gold);
+      color: #fff;
+    }
+
+    .tab-btn.active {
+      background: var(--accent-soft);
+      border-color: var(--accent);
+      color: #fff;
+    }
+
+    /* Main Container */
+    .container {
+      max-width: 1050px;
+      margin: 28px auto;
+      padding: 0 20px;
+    }
+
+    .tab-content {
+      display: none;
+      animation: fadeIn 0.3s ease;
+    }
+
+    .tab-content.active {
+      display: block;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Cards & Boxes */
+    .card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 24px;
+      margin-bottom: 20px;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.35);
+    }
+
+    .card-header {
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 12px;
+      margin-bottom: 18px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .card-title {
+      font-family: var(--font-mono);
+      font-size: 1.2rem;
+      color: var(--gold);
+      letter-spacing: 0.5px;
+    }
+
+    /* Prologue Script Styling */
+    .story-scene {
+      background: var(--bg-card-alt);
+      border-left: 3px solid var(--accent);
+      padding: 16px 20px;
+      border-radius: 0 8px 8px 0;
+      margin-bottom: 16px;
+    }
+
+    .story-narration {
+      color: var(--text-muted);
+      font-style: italic;
+      margin-bottom: 12px;
+    }
+
+    .dialogue {
+      margin-bottom: 10px;
+      padding-left: 10px;
+      border-left: 2px solid #334155;
+    }
+
+    .speaker {
+      font-weight: 700;
+      color: #fff;
+      font-family: var(--font-mono);
+      font-size: 0.9rem;
+    }
+
+    .speaker.ajuy { color: #38bdf8; }
+    .speaker.awang { color: #fbbf24; }
+    .speaker.kepsek { color: #f87171; }
+    .speaker.walikelas { color: #a78bfa; }
+    .speaker.gosh { color: #e11d48; text-transform: uppercase; letter-spacing: 2px; }
+
+    .laptop-mockup {
+      background: #05070a;
+      border: 2px solid #334155;
+      border-radius: 8px;
+      padding: 18px;
+      font-family: var(--font-mono);
+      margin-top: 16px;
+    }
+
+    .laptop-bar {
+      display: flex;
+      gap: 6px;
+      margin-bottom: 12px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid #1e293b;
+    }
+
+    .dot { width: 10px; height: 10px; border-radius: 50%; }
+    .dot.r { background: #ef4444; }
+    .dot.y { background: #f59e0b; }
+    .dot.g { background: #10b981; }
+
+    /* Suspects Grid */
+    .grid-suspects {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 14px;
+      margin-top: 14px;
+    }
+
+    .suspect-card {
+      background: var(--bg-card-alt);
+      border: 1px solid var(--border);
+      padding: 16px;
+      border-radius: 8px;
+      position: relative;
+    }
+
+    .suspect-role {
+      font-size: 0.75rem;
+      font-family: var(--font-mono);
+      color: var(--gold);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .suspect-name {
+      font-size: 1.05rem;
+      font-weight: 700;
+      margin: 4px 0 6px;
+      color: #fff;
+    }
+
+    /* Roadmap Table */
+    .stage-overview-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+      gap: 14px;
+    }
+
+    .stage-overview-item {
+      background: var(--bg-card-alt);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 16px;
+      cursor: pointer;
+      transition: transform 0.15s ease, border-color 0.2s ease;
+    }
+
+    .stage-overview-item:hover {
+      transform: translateY(-2px);
+      border-color: var(--gold);
+    }
+
+    .stage-meta {
+      display: flex;
+      justify-content: space-between;
+      font-family: var(--font-mono);
+      font-size: 0.78rem;
+      color: var(--accent);
+      margin-bottom: 6px;
+    }
+
+    /* Stage Selector Pills */
+    .stage-selector {
+      display: flex;
+      gap: 8px;
+      overflow-x: auto;
+      padding-bottom: 10px;
+      margin-bottom: 20px;
+    }
+
+    .stage-pill {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+      padding: 10px 16px;
+      border-radius: 8px;
+      font-family: var(--font-mono);
+      font-weight: 700;
+      font-size: 0.85rem;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: all 0.2s;
+    }
+
+    .stage-pill.active {
+      background: var(--gold-soft);
+      border-color: var(--gold);
+      color: var(--gold);
+    }
+
+    /* Timer Box */
+    .timer-box {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: #05070a;
+      border: 1px solid var(--border);
+      padding: 8px 14px;
+      border-radius: 8px;
+      font-family: var(--font-mono);
+    }
+
+    .timer-display {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--gold);
+      min-width: 65px;
+    }
+
+    .btn-sm {
+      background: var(--bg-card-alt);
+      border: 1px solid var(--border);
+      color: var(--text-main);
+      padding: 5px 10px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 0.78rem;
+    }
+
+    .btn-sm:hover {
+      border-color: var(--gold);
+    }
+
+    /* Clues & Witness boxes */
+    .clue-list {
+      background: var(--bg-card-alt);
+      border-left: 3px solid var(--gold);
+      padding: 14px 18px;
+      border-radius: 0 8px 8px 0;
+      margin: 14px 0;
+    }
+
+    .witness-box {
+      background: #0d111a;
+      border: 1px dashed #334155;
+      padding: 14px 18px;
+      border-radius: 8px;
+      margin-bottom: 12px;
+    }
+
+    .witness-title {
+      font-family: var(--font-mono);
+      color: var(--gold);
+      font-weight: 700;
+      font-size: 0.9rem;
+      margin-bottom: 4px;
+    }
+
+    /* Secret Paper in Stage 5 */
+    .secret-paper {
+      background: #fef3c7;
+      color: #1e293b;
+      padding: 24px;
+      border-radius: 6px;
+      font-family: var(--font-mono);
+      margin: 18px 0;
+      box-shadow: inset 0 0 25px rgba(180, 83, 9, 0.25);
+      position: relative;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+
+    .secret-paper:hover {
+      transform: scale(1.01);
+    }
+
+    .paper-code {
+      text-align: center;
+      font-size: 1.5rem;
+      font-weight: 900;
+      letter-spacing: 8px;
+      margin-top: 16px;
+      padding-top: 12px;
+      border-top: 1px dashed #92400e;
+      color: #991b1b;
+    }
+
+    /* Questions & Form */
+    .question-item {
+      margin-bottom: 16px;
+    }
+
+    .question-label {
+      display: block;
+      font-weight: 600;
+      margin-bottom: 6px;
+      color: #f8fafc;
+    }
+
+    textarea, input[type="text"], input[type="password"] {
+      width: 100%;
+      background: #080a0f;
+      border: 1px solid var(--border);
+      color: var(--text-main);
+      padding: 12px;
+      border-radius: 6px;
+      font-family: var(--font-sans);
+      font-size: 0.95rem;
+      resize: vertical;
+    }
+
+    textarea:focus, input:focus {
+      outline: none;
+      border-color: var(--gold);
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: #fff;
+      border: none;
+      padding: 11px 20px;
+      border-radius: 6px;
+      font-weight: 700;
+      cursor: pointer;
+      font-size: 0.9rem;
+      transition: opacity 0.2s;
+    }
+
+    .btn-primary:hover {
+      opacity: 0.9;
+    }
+
+    .btn-secondary {
+      background: var(--gold-soft);
+      color: var(--gold);
+      border: 1px solid var(--gold);
+      padding: 11px 20px;
+      border-radius: 6px;
+      font-weight: 700;
+      cursor: pointer;
+      font-size: 0.9rem;
+    }
+
+    .action-row {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 16px;
+    }
+
+    /* Evidence Locker */
+    .evidence-drawer {
+      display: none;
+      margin-top: 18px;
+      border-top: 1px solid var(--border);
+      padding-top: 18px;
+    }
+
+    .evidence-drawer.open {
+      display: block;
+    }
+
+    /* Toast Notification */
+    #toast {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      background: var(--emerald);
+      color: #052e16;
+      font-weight: 700;
+      padding: 12px 20px;
+      border-radius: 8px;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.5);
+      display: none;
+      z-index: 999;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="header-inner">
+      <div class="brand">
+        <span class="badge-classified">RAHASIA</span>
+        <h1>BERKAS KASUS-001 // MBG</h1>
+      </div>
+      <nav class="nav-tabs">
+        <button class="tab-btn active" onclick="switchTab('tab-briefing', this)">📁 Berkas & Saksi</button>
+        <button class="tab-btn" onclick="switchTab('tab-prolog', this)">📖 Prolog Cerita</button>
+        <button class="tab-btn" onclick="switchTab('tab-stages', this)">🔍 Terminal Investigasi (Tahap 1-7)</button>
+        <button class="tab-btn" onclick="switchTab('tab-admin', this)">🔐 Kunci Admin</button>
+      </nav>
+    </div>
+  </header>
+
+  <div class="container">
+
+    <!-- ================= TAB 1: BRIEFING & DAFTAR SAKSI ================= -->
+    <section id="tab-briefing" class="tab-content active">
+      <div class="card">
+        <div class="card-header">
+          <h2 class="card-title">G. AWANGGA: BERKAS KASUS-001</h2>
+          <span style="font-family: var(--font-mono); font-size: 0.85rem; color: var(--text-muted);">WAKTU KEJADIAN: 10.00 WIB</span>
+        </div>
+
+        <p style="margin-bottom: 14px;">
+          Pada pukul <strong>10.00 WIB</strong>, empat ikat ompreng MBG dibawa menuju sebuah kelas. Hari itu seharusnya berjalan seperti biasa, sampai Ajuy mendadak kehilangan kesadarannya setelah membuka makanan.
+        </p>
+        <p style="margin-bottom: 14px;">
+          Satu per satu kejadian aneh mulai bermunculan. Kesurupan, bisikan misterius, dan sebuah gedung terbengkalai yang ternyata masih beroperasi. Awangga yakin semuanya saling berhubungan, tetapi tak seorang pun mempercayainya.
+        </p>
+        <p style="margin-bottom: 14px;">
+          Ketika rumor tentang makanan berhantu menyebar, kepala sekolah justru memberikan hukuman kepada Awangga. Namun, tiga hari setelah para siswa menolak makan MBG, seseorang mulai merasakan akibat dari janji yang pernah dibuatnya.
+        </p>
+
+        <div class="clue-list">
+          <p><strong>Sekarang, kalian adalah tim detektif yang bertugas mengungkap kebenaran.</strong></p>
+          <p style="font-family: var(--font-mono); color: var(--gold); margin: 8px 0;">
+            Satu kasus. Banyak petunjuk. Satu rahasia yang harus ditemukan.
+          </p>
+          <p>
+            Jangan terburu-buru mengambil kesimpulan. Sebab, dalam kasus ini, orang yang terlihat paling tidak bersalah belum tentu tidak menyimpan rahasia.
+          </p>
+        </div>
+
+        <p style="margin-top: 14px;">
+          <strong>PENYELIDIKAN DIMULAI.</strong> Perhatikan setiap informasi yang diberikan. Catat nama, waktu, tempat, dan perkataan yang terasa janggal. Setiap petunjuk mungkin menjadi kunci untuk membuka tahap berikutnya. <em>Good luck, investigators.</em>
+        </p>
+
+        <div class="action-row">
+          <button class="btn-primary" onclick="openTabById('tab-prolog')">Baca Prolog Cerita Lengkap →</button>
+          <button class="btn-secondary" onclick="openTabById('tab-stages')">Mulai Tahap 01 Investigasi →</button>
+        </div>
+      </div>
+
+      <!-- DAFTAR NAMA YANG HARUS DISELIDIKI -->
+      <div class="card">
+        <div class="card-header">
+          <h2 class="card-title">DAFTAR NAMA YANG HARUS DISELIDIKI</h2>
+          <span style="font-size: 0.85rem; color: var(--text-muted);">5 Subjek Terkait</span>
+        </div>
+        <div class="grid-suspects">
+          <div class="suspect-card">
+            <div class="suspect-role">Saksi Utama</div>
+            <div class="suspect-name">Ajuy</div>
+            <p style="font-size: 0.85rem; color: var(--text-muted);">Siswa yang membawa 2 ikat ompreng bersama Awangga dan mengalami insiden tepat setelah membuka ompreng ayam goreng.</p>
+          </div>
+          <div class="suspect-card">
+            <div class="suspect-role">Penyelidik Pertama</div>
+            <div class="suspect-name">Awangga</div>
+            <p style="font-size: 0.85rem; color: var(--text-muted);">Rekan Ajuy yang mencurigai hubungan antara distribusi MBG dan gedung terbengkalai, namun justru dihukum.</p>
+          </div>
+          <div class="suspect-card">
+            <div class="suspect-role">Pemberi Hukuman</div>
+            <div class="suspect-name">Kepala Sekolah</div>
+            <p style="font-size: 0.85rem; color: var(--text-muted);">Membantah keras teori Awangga, memintanya tidak ikut campur, dan memberikan hukuman atas tuduhan tanpa bukti.</p>
+          </div>
+          <div class="suspect-card">
+            <div class="suspect-role">Pemegang Kunci</div>
+            <div class="suspect-name">Penjaga Gedung</div>
+            <p style="font-size: 0.85rem; color: var(--text-muted);">Menolak memberikan keterangan tentang aktivitas di dalam gedung terbengkalai dan menyuruh siswa berhenti bertanya.</p>
+          </div>
+          <div class="suspect-card">
+            <div class="suspect-role">Pengantar Ompreng</div>
+            <div class="suspect-name">Petugas Distribusi MBG</div>
+            <p style="font-size: 0.85rem; color: var(--text-muted);">Mengantarkan empat ikat ompreng sesuai daftar pengantaran rutin pukul 10.00 WIB.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- PETA TAHAP PENYELIDIKAN -->
+      <div class="card">
+        <div class="card-header">
+          <h2 class="card-title">PETA 7 TAHAP PENYELIDIKAN</h2>
+          <span style="font-family: var(--font-mono); font-size: 0.85rem; color: var(--gold);">TOTAL SKOR MAKSIMAL: 125 POIN</span>
+        </div>
+        <div class="stage-overview-grid">
+          <div class="stage-overview-item" onclick="jumpToStage(0)">
+            <div class="stage-meta"><span>TAHAP 01</span><span>10 Menit · Maks 10 Poin</span></div>
+            <strong>KEJADIAN PUKUL 10.00</strong>
+            <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 6px;">Menentukan urutan awal kejadian dan menemukan kejanggalan pada empat ikat ompreng.</p>
+          </div>
+          <div class="stage-overview-item" onclick="jumpToStage(1)">
+            <div class="stage-meta"><span>TAHAP 02</span><span>15 Menit · Maks 15 Poin</span></div>
+            <strong>KESAKSIAN PARA SAKSI</strong>
+            <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 6px;">Memeriksa keterangan Ajuy, Awangga, dan petugas distribusi.</p>
+          </div>
+          <div class="stage-overview-item" onclick="jumpToStage(2)">
+            <div class="stage-meta"><span>TAHAP 03</span><span>15 Menit · Maks 15 Poin</span></div>
+            <strong>GEDUNG TERBENGKALAI</strong>
+            <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 6px;">Menemukan alasan gedung yang seharusnya tidak digunakan ternyata masih beroperasi.</p>
+          </div>
+          <div class="stage-overview-item" onclick="jumpToStage(3)">
+            <div class="stage-meta"><span>TAHAP 04</span><span>15 Menit · Maks 15 Poin</span></div>
+            <strong>BISIKAN DAN RUMOR</strong>
+            <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 6px;">Memisahkan fakta dari rumor kesurupan dan makanan berhantu.</p>
+          </div>
+          <div class="stage-overview-item" onclick="jumpToStage(4)">
+            <div class="stage-meta"><span>TAHAP 05</span><span>15 Menit · Maks 20 Poin</span></div>
+            <strong>JANJI YANG DILANGGAR</strong>
+            <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 6px;">Memecahkan sandi dan mencari tahu siapa yang menyimpan rahasia tentang gedung tersebut.</p>
+          </div>
+          <div class="stage-overview-item" onclick="jumpToStage(5)">
+            <div class="stage-meta"><span>TAHAP 06</span><span>15 Menit · Maks 20 Poin</span></div>
+            <strong>REKONSTRUKSI KASUS</strong>
+            <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 6px;">Menggabungkan semua bukti menjadi satu kronologi.</p>
+          </div>
+          <div class="stage-overview-item" onclick="jumpToStage(6)">
+            <div class="stage-meta"><span>TAHAP 07</span><span>15–20 Menit · Maks 30 Poin</span></div>
+            <strong>KEPUTUSAN AKHIR</strong>
+            <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 6px;">Menentukan pelaku, motif, arti janji, dan hubungan seluruh kejadian.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= TAB 2: PROLOG CERITA ================= -->
+    <section id="tab-prolog" class="tab-content">
+      <div class="card">
+        <div class="card-header">
+          <h2 class="card-title">ARSIP NARASI: KEJADIAN AWAL (PUKUL 10.00 WIB)</h2>
+          <span style="font-size: 0.82rem; color: var(--text-muted);">Rekaman Perspektif Awangga</span>
+        </div>
+
+        <div class="story-scene">
+          <p class="story-narration">
+            Pukul 10.00 WIB, Awangga dan Ajuy berjalan menuju kelas sambil membawa 4 ikat ompreng MBG, masing-masing membawa 2 ikat.
+          </p>
+          <div class="dialogue"><span class="speaker ajuy">Ajuy:</span> "Wang, menurut lu hari ini siapa yang bakal kesurupan?"</div>
+          <div class="dialogue"><span class="speaker awang">Awang:</span> "Gua yakin itu lu."</div>
+          <div class="dialogue"><span class="speaker ajuy">Ajuy:</span> "Amit-amit. Kalau kesurupan bisa milih hantunya, lu pengen jadi apa? Kalo gua pengen jadi pocong pincang."</div>
+          <div class="dialogue"><span class="speaker awang">Awang:</span> "Abis ngapain pocongnya pincang? Di-sleding suster ngesot?"</div>
+          <div class="dialogue"><span class="speaker ajuy">Ajuy:</span> "Engga, katanya abis operasi usus buntu. Haha."</div>
+          <div class="dialogue"><span class="speaker awang">Awang:</span> "Asbun, gak nyambung banget anjir."</div>
+          <div class="dialogue"><span class="speaker ajuy">Ajuy:</span> "Oh ya, kelas kita belum ada yang kesurupan ya? Kayanya karena ada anak ustad, si Michel."</div>
+        </div>
+
+        <div class="story-scene">
+          <p class="story-narration">
+            Mereka terus lanjut berjalan menuju kelas tanpa adanya obrolan lagi. Sesampainya di kelas, Ajuy membuka pintu dan disambut suara anak kelas.
+          </p>
+          <div class="dialogue"><span class="speaker ajuy">Ajuy:</span> "Hai teman-teman, kita party."</div>
+          <p class="story-narration">Ajuy membuka ompreng MBG miliknya, sambil berbicara seorang diri.</p>
+          <div class="dialogue"><span class="speaker ajuy">Ajuy:</span> "Hari ini bakal dapat makan apa ya... Wah ayam goreng, selamat makan."</div>
+          <p class="story-narration">
+            Belum sempat Ajuy memakan makanannya, tiba-tiba terdengar suara bisikan dan matanya berubah menjadi putih. Ajuy berdiri dari kursinya. Awang me-notice Ajuy yang tiba-tiba berdiri, awalnya tidak ada kecurigaan apa pun.
+          </p>
+          <div class="dialogue"><span class="speaker awang">Awang:</span> "Ngapain Juy? Keselek ompreng?"</div>
+          <div class="dialogue"><span class="speaker">Siswa 1:</span> "Kayaknya kesurupan."</div>
+          <div class="dialogue"><span class="speaker">Siswa 2:</span> "Cepat panggil guru!"</div>
+          <div class="dialogue"><span class="speaker">Siswa 3:</span> "Biarin aja, nanti juga sadar sendiri."</div>
+          <p class="story-narration">
+            Ajuy berjalan menuju keluar kelas, membuka <em>double door</em> kelasnya lalu memiringkan kepalanya.
+          </p>
+          <div class="dialogue"><span class="speaker">Siswa 1:</span> "Woi! Ajuy!"</div>
+          <div class="dialogue"><span class="speaker">Siswi 2 & 3:</span> "Tolong! Tolong!"</div>
+          <p class="story-narration">
+            Ajuy terus meletakkan kepalanya ke pintu sebelah kiri, dan pintu sebelah kanan Ajuy tutup dengan keras sehingga menghantam lehernya. Siswa-siswi di kelas hanya teriak ketakutan, Ajuy terus melakukan itu dengan keras hingga seisi kelas histeris melihat kejadian mengerikan tersebut.
+          </p>
+        </div>
+
+        <div class="story-scene">
+          <p class="story-narration">
+            Kini Awang dibawa ke ruang kepala sekolah oleh wali kelasnya sendiri setelah jam pelajaran selesai, untuk diinterogasi bagaimana semua ini bisa terjadi.
+          </p>
+          <div class="dialogue"><span class="speaker awang">Awang:</span> "Jadi, semua kesurupan ini terjadi setelah MBG datang, Pak."</div>
+          <div class="dialogue"><span class="speaker kepsek">Kepala Sekolah:</span> "Jangan mengada-ada kamu, bagaimana mungkin MBG bisa bikin orang kesurupan, gak nyambung gitu loh. Biarkan saja polisi mengusut kasus ini, kamu tidak usah ikut campur dengan teori cocoklogimu itu."</div>
+          <p class="story-narration">
+            Kepala sekolah itu tidak menunggu jawaban apa pun dari Awang, ia langsung berbicara kepada Awang tanpa menatap matanya.
+          </p>
+          <div class="dialogue"><span class="speaker kepsek">Kepala Sekolah:</span> "Ya sudah, sana pulang."</div>
+          <p class="story-narration">
+            Awang bukannya pulang, malah setelah keluar dari ruang kepala sekolah ia berbicara dengan wali kelasnya di depan ruang kepala sekolah itu.
+          </p>
+          <div class="dialogue"><span class="speaker awang">Awang:</span> "Pak, gimana menurut Bapak?"</div>
+          <div class="dialogue"><span class="speaker walikelas">Wali Kelas:</span> "Bapak juga setuju dengan kepala sekolah, memang tidak nyambung MBG dengan kesurupan. Terus yang punya dapur MBG-nya kan Pak Kepala Sekolah, gak mungkin dia buat hal jahat kepada murid-muridnya. Hal itu bisa bikin namanya rusak juga, beliau pasti menjaga nama baiknya."</div>
+          <div class="dialogue"><span class="speaker awang">Awang:</span> "Hmm, masuk akal juga sih, Pak."</div>
+          <div class="dialogue"><span class="speaker walikelas">Wali Kelas:</span> "Ya sudah, kamu pulang saja, karena sekolah diliburkan beberapa hari. Semua orang akan Bapak koordinasikan ke kamu, ya?"</div>
+        </div>
+
+        <div class="story-scene">
+          <p class="story-narration">
+            Awang sudah tiba di rumahnya. Ia duduk di sofa di dalam rumahnya seorang diri, wajahnya terlihat murung dan jelas masih terkejut dengan apa yang ia lihat tadi di sekolahannya.
+          </p>
+          <div class="dialogue"><span class="speaker awang">Awang:</span> "Ah, kenapa perasaan gua gak enak ya, gua yakin banget kalau semua itu berhubungan. Tapi, gimana cara membuktikannya ya? Apa perlu gua selidiki? Tapi dari mana mulainya?"</div>
+          <p class="story-narration">Di tengah-tengah Awang sedang berpikir, dia dapat mendengar bisikan halus di telinganya.</p>
+          <div class="dialogue"><span class="speaker gosh">Gosh:</span> "Pergi ke dapurnya!"</div>
+          <p class="story-narration">
+            Awang jelas tegang mendengar bisikan itu. Sepersekian detik Awang terbangun dari duduknya dan terkejut. Keringat mengucur dari dahinya, tubuhnya terasa tegang dan terengah-engah.
+          </p>
+          <div class="dialogue"><span class="speaker awang">Awang:</span> "Aaa! Apa itu?! Ajuy??! ... Pergi ke dapurnya?"</div>
+          <p class="story-narration">
+            Awang langsung mengambil laptopnya dan membukanya di atas meja di dekat sofa.
+          </p>
+          <div class="dialogue"><span class="speaker awang">Awang:</span> "Pertama-tama aku harus cari tahu di mana alamat dapurnya. Semua pasti ada di web MBG-nya."</div>
+
+          <div class="laptop-mockup">
+            <div class="laptop-bar">
+              <span class="dot r"></span><span class="dot y"></span><span class="dot g"></span>
+              <span style="font-size: 0.75rem; color: #64748b; margin-left: 8px;">https://portal-distribusi-mbg-sekolah.id/lokasi-dapur</span>
+            </div>
+            <p style="color: #10b981; font-size: 0.85rem;">> Mencari titik distribusi & gudang penyimpanan MBG...</p>
+            <p style="color: #e2e8f0; font-size: 0.9rem; margin-top: 6px;">
+              <strong>LOKASI TERDAFTAR:</strong> Blok Sektor Lama — Bangunan Eks-Kegiatan Sekolah (Status: <em>Nonaktif / Terbengkalai</em>)
+            </p>
+          </div>
+
+          <p class="story-narration" style="margin-top: 14px;">
+            Awang terus mengetik, dan tiba-tiba berhenti. Ia melihat sesuatu yang membuatnya bingung dan terkejut.
+          </p>
+          <div class="dialogue"><span class="speaker awang">Awang:</span> "Eh... Alamat ini? Bukannya ini gedung terbengkalai?"</div>
+        </div>
+
+        <button class="btn-primary" onclick="openTabById('tab-stages')">Lanjut ke Terminal Investigasi (Tahap 01) →</button>
+      </div>
+    </section>
+
+    <!-- ================= TAB 3: TERMINAL INVESTIGASI (TAHAP 1 - 7) ================= -->
+    <section id="tab-stages" class="tab-content">
+      <div class="stage-selector" id="stagePills"></div>
+      <div id="stageContainer"></div>
+    </section>
+
+    <!-- ================= TAB 4: PANEL ADMIN ================= -->
+    <section id="tab-admin" class="tab-content">
+      <div class="card" id="adminLockCard">
+        <div class="card-header">
+          <h2 class="card-title">🔐 OTORISASI KUNCI ADMIN</h2>
+        </div>
+        <p style="margin-bottom: 14px; color: var(--text-muted);">
+          Halaman ini berisi <strong>Kunci Jawaban Admin (Tahap 01–07)</strong>, <strong>Solusi Akhir Cerita (Pak Damar)</strong>, dan <strong>Kalkulator Skor Tim</strong>. Masukkan kode sandi untuk membuka.
+        </p>
+        <div style="display: flex; gap: 10px; max-width: 400px;">
+          <input type="password" id="adminPinInput" placeholder="Masukkan sandi (Hint: 6 huruf di Tahap 5)" />
+          <button class="btn-primary" onclick="unlockAdmin()">Buka</button>
+        </div>
+        <p id="adminError" style="color: var(--accent); font-size: 0.85rem; margin-top: 8px; display: none;">
+          Sandi salah! Coba ketik: GEDUNG
+        </p>
+      </div>
+
+      <div id="adminContent" style="display: none;">
+        <div class="card">
+          <div class="card-header">
+            <h2 class="card-title">✅ KUNCI JAWABAN ADMIN PER TAHAP</h2>
+            <button class="btn-sm" onclick="lockAdmin()">Kunci Kembali</button>
+          </div>
+          <div id="adminKeysList"></div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <h2 class="card-title">📁 SOLUSI CERITA & BUKTI FINAL (THE TRUTH)</h2>
+          </div>
+          <div class="clue-list">
+            <p style="margin-bottom: 10px;">
+              <strong>Penjaga gedung, Pak Damar,</strong> diam-diam masih menggunakan gedung tersebut sebagai tempat penyimpanan sementara perlengkapan distribusi sekolah. Ia pernah berjanji kepada kepala sekolah sebelumnya bahwa gedung itu tidak akan digunakan lagi tanpa izin.
+            </p>
+            <p style="margin-bottom: 10px;">
+              Ketika Awangga melihat aktivitas di sana, Pak Damar takut rahasianya terbongkar. Rumor misterius kemudian membuat perhatian siswa beralih dari aktivitas gedung menuju dugaan makanan berhantu.
+            </p>
+            <p>
+              Kepala sekolah menghukum Awangga karena menuduh adanya kegiatan tersembunyi tanpa bukti yang cukup. Namun, setelah siswa menolak MBG selama tiga hari, aktivitas distribusi terganggu dan Pak Damar khawatir penggunaan gedung tersebut akhirnya diketahui.
+            </p>
+          </div>
+          <p style="font-size: 0.85rem; color: var(--gold); margin-top: 10px;">
+            <em>*Penting: Ini adalah solusi cerita yang diusulkan untuk kebutuhan permainan, bukan fakta yang sudah dibuktikan oleh narasi awal.</em>
+          </p>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <div id="toast">Jawaban berhasil disalin ke clipboard!</div>
+
+  <script>
+    // Data 7 Tahap Investigasi
+    const stagesData = [
+      {
+        id: 1,
+        code: "TAHAP 01",
+        title: "THE FIRST INCIDENT (KEJADIAN PUKUL 10.00)",
+        durationMin: 10,
+        maxPoints: 10,
+        focus: "Menentukan urutan awal kejadian dan menemukan kejanggalan pada empat ikat ompreng.",
+        narrative: `
+          <p>Pukul <strong>10.00 WIB</strong>, empat ikat ompreng MBG tiba di kelas. Menurut keterangan awal, Ajuy kehilangan kesadaran tidak lama setelah membuka salah satu ompreng.</p>
+          <p style="margin-top:10px;">Namun, catatan distribusi menyebutkan bahwa seluruh ompreng telah diperiksa sebelum dibawa ke kelas.</p>
+          <div class="clue-list">
+            <strong>Ada tiga hal yang belum diketahui:</strong>
+            <ul style="margin-left: 18px; margin-top: 6px;">
+              <li>Siapa yang terakhir membawa ompreng?</li>
+              <li>Apakah keempat ikat ompreng berasal dari tempat yang sama?</li>
+              <li>Mengapa Awangga langsung menghubungkan kejadian ini dengan gedung terbengkalai?</li>
+            </ul>
+          </div>
+        `,
+        questions: [
+          "1. Informasi apa yang harus diperiksa terlebih dahulu?",
+          "2. Apakah kejadian yang dialami Ajuy cukup untuk membuktikan bahwa makanannya bermasalah? Jelaskan.",
+          "3. Apa hubungan yang mungkin ada antara ompreng dan gedung terbengkalai?"
+        ],
+        adminKey: "Peserta seharusnya meminta catatan distribusi, keterangan saksi, dan pemeriksaan yang layak. Ajuy kehilangan kesadaran setelah membuka makanan tidak otomatis membuktikan makanan sebagai penyebab. Hubungan dengan gedung masih berupa hipotesis."
+      },
+      {
+        id: 2,
+        code: "TAHAP 02",
+        title: "THE WITNESS STATEMENTS (KESAKSIAN PARA SAKSI)",
+        durationMin: 15,
+        maxPoints: 15,
+        focus: "Memeriksa keterangan Ajuy, Awangga, dan petugas distribusi.",
+        narrative: `
+          <p style="margin-bottom: 12px;">Tim investigasi berhasil mengumpulkan tiga kesaksian:</p>
+          <div class="witness-box">
+            <div class="witness-title">SAKSI A — AJUY</div>
+            “Aku baru membuka ompreng saat mulai merasa aneh. Aku tidak ingat jelas apa yang terjadi setelahnya.”
+          </div>
+          <div class="witness-box">
+            <div class="witness-title">SAKSI B — AWANGGA</div>
+            “Aku pernah melihat seseorang masuk ke gedung itu pagi-pagi. Gedungnya memang terlihat kosong, tapi aku yakin ada aktivitas di dalam.”
+          </div>
+          <div class="witness-box">
+            <div class="witness-title">SAKSI C — PETUGAS DISTRIBUSI</div>
+            “Aku mengantar empat ikat ompreng seperti biasa. Aku hanya mengikuti daftar pengantaran yang diberikan kepadaku.”
+          </div>
+          <p style="color: var(--gold); font-size: 0.9rem;">*Ketiga saksi belum memberikan penjelasan lengkap.</p>
+        `,
+        questions: [
+          "1. Kesaksian siapa yang masih membutuhkan bukti pendukung?",
+          "2. Apa yang harus ditanyakan kepada petugas distribusi?",
+          "3. Mengapa ingatan Ajuy belum bisa dijadikan satu-satunya dasar kesimpulan?"
+        ],
+        adminKey: "Ketiganya perlu diverifikasi. Periksa waktu, asal dan tujuan pengantaran, serta saksi lain. Ingatan Ajuy yang tidak lengkap tidak membuktikan adanya kejadian supernatural."
+      },
+      {
+        id: 3,
+        code: "TAHAP 03",
+        title: "THE ABANDONED BUILDING (GEDUNG TERBENGKALAI)",
+        durationMin: 15,
+        maxPoints: 15,
+        focus: "Menemukan alasan gedung yang seharusnya tidak digunakan ternyata masih beroperasi.",
+        narrative: `
+          <p>Awangga akhirnya menunjukkan catatan yang pernah dibuatnya. Di bagian depan gedung tertulis bahwa bangunan tersebut sudah tidak digunakan untuk kegiatan sekolah.</p>
+          <div class="clue-list">
+            <strong>Namun, Awangga mengingat tiga hal:</strong>
+            <ul style="margin-left: 18px; margin-top: 6px;">
+              <li>Ia pernah melihat cahaya dari salah satu jendela.</li>
+              <li>Terkadang terdengar suara dari dalam gedung.</li>
+              <li>Seseorang terlihat membawa barang masuk pada pagi hari.</li>
+            </ul>
+          </div>
+          <p>Penjaga gedung menolak memberikan penjelasan. Ia hanya berkata: <em>"Kalian tidak perlu tahu apa yang ada di dalam."</em></p>
+        `,
+        questions: [
+          "1. Apa yang dapat disimpulkan dari petunjuk tersebut?",
+          "2. Bukti apa yang diperlukan untuk memastikan bahwa gedung masih digunakan?",
+          "3. Siapa yang paling tepat dimintai keterangan selanjutnya, dan mengapa?"
+        ],
+        adminKey: "Gedung mungkin masih digunakan, tetapi cahaya dan suara saja belum membuktikan untuk kegiatan apa. Periksa catatan akses, izin penggunaan, saksi, serta keterangan penjaga dan pihak sekolah."
+      },
+      {
+        id: 4,
+        code: "TAHAP 04",
+        title: "THE WHISPERS (BISIKAN DAN RUMOR)",
+        durationMin: 15,
+        maxPoints: 15,
+        focus: "Memisahkan fakta dari rumor kesurupan dan makanan berhantu.",
+        narrative: `
+          <p>Setelah kejadian Ajuy, sejumlah siswa mengaku mendengar bisikan di dekat koridor menuju gedung terbengkalai.</p>
+          <p style="margin-top: 10px;">Rumor semakin menyebar ketika beberapa siswa menunjukkan perilaku yang mereka sebut sebagai kesurupan. Sebagian siswa mulai yakin bahwa makanan MBG telah membawa sesuatu yang tidak seharusnya ada di sekolah.</p>
+          <p style="margin-top: 10px;">Akan tetapi, belum ada bukti yang memastikan bahwa kejadian tersebut saling berkaitan.</p>
+          <div class="clue-list">
+            <strong>Ingatan Tambahan Awangga:</strong><br/>
+            Suara yang terdengar dari arah gedung muncul pada waktu yang hampir sama dengan aktivitas pengantaran barang.
+          </div>
+        `,
+        questions: [
+          "1. Bagaimana cara membedakan rumor dengan fakta dalam kasus ini?",
+          "2. Apa kemungkinan penjelasan lain dari suara yang terdengar?",
+          "3. Petunjuk apa yang perlu dicocokkan untuk mengetahui apakah kejadian di kelas dan gedung memang berhubungan?"
+        ],
+        adminKey: "Periksa saksi secara terpisah, waktu kejadian, dan sumber suara. Jangan menganggap rumor kesurupan atau makanan berhantu sebagai bukti penyebab Ajuy kehilangan kesadaran."
+      },
+      {
+        id: 5,
+        code: "TAHAP 05",
+        title: "THE BROKEN PROMISE (JANJI YANG DILANGGAR)",
+        durationMin: 15,
+        maxPoints: 20,
+        focus: "Memecahkan sandi dan mencari tahu siapa yang menyimpan rahasia tentang gedung tersebut.",
+        narrative: `
+          <p>Saat memeriksa catatan lama sekolah, tim menemukan selembar kertas yang terselip di antara dokumen gedung terbengkalai. <em>(Klik kertas di bawah untuk membalik sisi depan/belakang)</em>:</p>
+          <div class="secret-paper" onclick="flipPaper(this)" data-side="front">
+            <div id="paperFront">
+              <div style="font-size: 0.75rem; text-transform: uppercase; color: #92400e; margin-bottom: 8px;">[ SISI DEPAN KERTAS — KLIK UNTUK MEMBALIK ]</div>
+              <p>"Gedung ini tidak boleh digunakan kembali tanpa sepengetahuan kepala sekolah. Aku sudah berjanji akan menjaga tempat ini tetap tertutup. Jika suatu hari tempat ini kembali beroperasi, kebenaran yang selama ini disembunyikan akan terungkap."</p>
+              <div class="paper-code">? — ? — ? — ? — ? — ?</div>
+            </div>
+            <div id="paperBack" style="display: none;">
+              <div style="font-size: 0.75rem; text-transform: uppercase; color: #92400e; margin-bottom: 8px;">[ SISI BELAKANG KERTAS — KLIK UNTUK MEMBALIK ]</div>
+              <p style="font-weight: 700; font-size: 1.05rem;">"Jangan hanya membaca apa yang tertulis. Cari tahu siapa yang membuat janji, siapa yang melanggarnya, dan siapa yang berusaha membuat semua orang berhenti bertanya."</p>
+            </div>
+          </div>
+        `,
+        questions: [
+          "1. Apa arti penting surat tersebut bagi kasus ini?",
+          "2. Siapa yang harus diperiksa berdasarkan isi surat?",
+          "3. Apa bukti yang diperlukan untuk memastikan bahwa janji tersebut benar-benar dilanggar?"
+        ],
+        adminKey: "Surat mengindikasikan adanya larangan penggunaan gedung dan janji untuk menjaga gedung tetap tertutup. Namun, penulis, tanggal, serta pelanggar janji belum diketahui. Peserta harus mencari bukti pendukung, bukan langsung menuduh kepala sekolah atau penjaga gedung."
+      },
+      {
+        id: 6,
+        code: "TAHAP 06",
+        title: "PUT THE PIECES TOGETHER (REKONSTRUKSI KASUS)",
+        durationMin: 15,
+        maxPoints: 20,
+        focus: "Menggabungkan semua bukti menjadi satu kronologi.",
+        narrative: `
+          <p style="margin-bottom: 12px;">Tim investigasi kini memiliki beberapa informasi kunci:</p>
+          <div class="witness-box"><span class="witness-title">PETUNJUK A:</span> Empat ikat ompreng diantarkan ke kelas pada pukul 10.00 WIB.</div>
+          <div class="witness-box"><span class="witness-title">PETUNJUK B:</span> Ajuy kehilangan kesadaran setelah membuka makanan, tetapi penyebabnya belum diketahui.</div>
+          <div class="witness-box"><span class="witness-title">PETUNJUK C:</span> Awangga pernah melihat aktivitas di gedung yang seharusnya tidak digunakan.</div>
+          <div class="witness-box"><span class="witness-title">PETUNJUK D:</span> Penjaga gedung menolak menjelaskan aktivitas di dalamnya.</div>
+          <div class="witness-box"><span class="witness-title">PETUNJUK E:</span> Sebuah surat menyebutkan janji untuk menjaga gedung tetap tertutup.</div>
+          <div class="witness-box"><span class="witness-title">PETUNJUK F:</span> Setelah rumor menyebar dan siswa menolak makan MBG selama tiga hari, seseorang mulai menunjukkan kekhawatiran bahwa rahasianya akan terbongkar.</div>
+        `,
+        questions: [
+          "1. Susun kronologi kejadian berdasarkan petunjuk yang tersedia.",
+          "2. Tentukan tiga petunjuk yang menurut kalian paling penting.",
+          "3. Buat satu teori yang menjelaskan hubungan antara MBG, gedung terbengkalai, hukuman Awangga, dan janji yang dilanggar."
+        ],
+        adminKey: "Penilaian didasarkan pada teori yang konsisten dengan petunjuk. Informasi yang tersedia belum cukup untuk menentukan pelaku secara pasti, sehingga tahap terakhir perlu memberikan bukti penentu."
+      },
+      {
+        id: 7,
+        code: "TAHAP 07",
+        title: "THE FINAL VERDICT (KEPUTUSAN AKHIR)",
+        durationMin: 20,
+        maxPoints: 30,
+        focus: "Menentukan pelaku, motif, arti janji, dan hubungan seluruh kejadian.",
+        narrative: `
+          <p>Para investigator, inilah kesempatan terakhir kalian untuk menyelesaikan kasus <strong>MBG-001</strong>. Kalian telah membaca kesaksian, memeriksa catatan gedung, dan menemukan surat tentang sebuah janji yang dilanggar.</p>
+          <p style="margin-top: 10px;">Ingat, investigator yang baik bukanlah orang yang paling cepat menuduh, melainkan orang yang mampu membuktikan teorinya melalui petunjuk. <strong>THE FINAL VERDICT IS YOURS.</strong></p>
+          <div style="margin: 16px 0;">
+            <button class="btn-secondary" onclick="toggleEvidenceLocker()">🔓 Buka Berkas Bukti Final (Bukti 1, 2, 3)</button>
+            <div id="evidenceDrawer" class="evidence-drawer">
+              <div class="witness-box">
+                <div class="witness-title">BUKTI 1 — CATATAN INVENTARIS</div>
+                Terdapat catatan barang sekolah (perlengkapan distribusi) yang disimpan di gedung terbengkalai pada tanggal kejadian.
+              </div>
+              <div class="witness-box">
+                <div class="witness-title">BUKTI 2 — SURAT LAMA</div>
+                Terdapat tanda tangan <strong>Pak Damar (Penjaga Gedung)</strong> pada surat janji kepada kepala sekolah sebelumnya untuk menjaga gedung tetap tertutup tanpa izin.
+              </div>
+              <div class="witness-box">
+                <div class="witness-title">BUKTI 3 — KESAKSIAN TAMBAHAN</div>
+                Seorang saksi melihat Pak Damar membawa barang masuk ke gedung pada pagi hari, tetapi kesaksian ini harus dikonfirmasi dengan catatan atau bukti lain.
+              </div>
+            </div>
+          </div>
+        `,
+        questions: [
+          "1. Siapa yang paling kalian curigai?",
+          "2. Apa motif yang mungkin dimilikinya?",
+          "3. Apa hubungan gedung terbengkalai dengan kejadian MBG?",
+          "4. Mengapa Awangga dihukum?",
+          "5. Apa arti janji yang pernah dibuat?",
+          "6. Petunjuk mana yang paling kuat mendukung kesimpulan kalian?"
+        ],
+        adminKey: "Pelaku yang menyembunyikan rahasia gedung: Pak Damar (Penjaga Gedung). Motif: Diam-diam memakai gedung untuk gudang sementara perlengkapan distribusi sekolah tanpa izin dan takut ketahuan. Awangga dihukum Kepala Sekolah karena menuduh tanpa bukti cukup. Janji adalah kesepakatan Pak Damar dengan kepala sekolah lama."
+      }
+    ];
+
+    let currentStageIdx = 0;
+    let timerInterval = null;
+    let remainingSeconds = 600;
+
+    function initApp() {
+      renderStagePills();
+      renderStage(0);
+      renderAdminKeys();
+    }
+
+    function switchTab(tabId, btnEl) {
+      document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+      document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
+      document.getElementById(tabId).classList.add('active');
+      if (btnEl) btnEl.classList.add('active');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function openTabById(tabId) {
+      const buttons = document.querySelectorAll('.tab-btn');
+      const map = { 'tab-briefing': 0, 'tab-prolog': 1, 'tab-stages': 2, 'tab-admin': 3 };
+      switchTab(tabId, buttons[map[tabId]]);
+    }
+
+    function jumpToStage(idx) {
+      openTabById('tab-stages');
+      renderStage(idx);
+    }
+
+    function renderStagePills() {
+      const container = document.getElementById('stagePills');
+      container.innerHTML = stagesData.map((s, idx) => `
+        <button class="stage-pill ${idx === currentStageIdx ? 'active' : ''}" onclick="renderStage(${idx})">
+          𖤐 ${s.code}
+        </button>
+      `).join('');
+    }
+
+    function renderStage(idx) {
+      currentStageIdx = idx;
+      renderStagePills();
+      const stage = stagesData[idx];
+
+      clearInterval(timerInterval);
+      timerInterval = null;
+      remainingSeconds = stage.durationMin * 60;
+
+      const savedAnswers = JSON.parse(localStorage.getItem('mbg_stage_' + stage.id) || '{}');
+
+      const questionsHtml = stage.questions.map((q, qIdx) => `
+        <div class="question-item">
+          <label class="question-label">${q}</label>
+          <textarea rows="3" id="ans_${stage.id}_${qIdx}" oninput="saveStageAnswers(${stage.id})" placeholder="Tulis hasil analisis tim kalian di sini...">${savedAnswers[qIdx] || ''}</textarea>
+        </div>
+      `).join('');
+
+      document.getElementById('stageContainer').innerHTML = `
+        <div class="card">
+          <div class="card-header">
+            <div>
+              <span style="font-family: var(--font-mono); font-size: 0.8rem; color: var(--accent);">
+                DURASI: ${stage.durationMin} MENIT · MAKSIMAL ${stage.maxPoints} POIN
+              </span>
+              <h2 class="card-title" style="margin-top: 4px;">𖤐 ${stage.code}: ${stage.title}</h2>
+            </div>
+            <div class="timer-box">
+              <span class="timer-display" id="timerDisplay">${formatTime(remainingSeconds)}</span>
+              <button class="btn-sm" onclick="startTimer()">Mulai</button>
+              <button class="btn-sm" onclick="pauseTimer()">Jeda</button>
+              <button class="btn-sm" onclick="resetTimer(${stage.durationMin})">Reset</button>
+            </div>
+          </div>
+
+          <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 14px;">
+            <strong>Fokus Tahap:</strong> ${stage.focus}
+          </p>
+
+          <div>${stage.narrative}</div>
+
+          <hr style="border: 0; border-top: 1px solid var(--border); margin: 22px 0;" />
+
+          <h3 style="font-family: var(--font-mono); color: var(--gold); margin-bottom: 14px;">
+            ${stage.id === 6 ? 'TUGAS INVESTIGATOR' : stage.id === 7 ? 'FINAL REPORT' : 'PERTANYAAN INVESTIGASI'}
+          </h3>
+
+          ${questionsHtml}
+
+          <div class="action-row">
+            <button class="btn-primary" onclick="copyAnswersToClipboard(${idx})">📋 Salin Jawaban untuk Dikirim ke Grup</button>
+            ${idx > 0 ? `<button class="btn-sm" onclick="renderStage(${idx - 1})">← Tahap Sebelumnya</button>` : ''}
+            ${idx < stagesData.length - 1 ? `<button class="btn-secondary" onclick="renderStage(${idx + 1})">Lanjut ke ${stagesData[idx + 1].code} →</button>` : ''}
+          </div>
+        </div>
+      `;
+    }
+
+    function saveStageAnswers(stageId) {
+      const stage = stagesData.find(s => s.id === stageId);
+      const data = {};
+      stage.questions.forEach((_, qIdx) => {
+        const el = document.getElementById(`ans_${stageId}_${qIdx}`);
+        if (el) data[qIdx] = el.value;
+      });
+      localStorage.setItem('mbg_stage_' + stageId, JSON.stringify(data));
+    }
+
+    function copyAnswersToClipboard(idx) {
+      const stage = stagesData[idx];
+      let text = `*LAPORAN TIM INVESTIGASI — ${stage.code}*\n*${stage.title}*\n\n`;
+      stage.questions.forEach((q, qIdx) => {
+        const val = document.getElementById(`ans_${stage.id}_${qIdx}`).value.trim() || '(Belum diisi)';
+        text += `*${q}*\nJawaban: ${val}\n\n`;
+      });
+
+      navigator.clipboard.writeText(text).then(() => {
+        const toast = document.getElementById('toast');
+        toast.style.display = 'block';
+        setTimeout(() => { toast.style.display = 'none'; }, 2600);
+      });
+    }
+
+    function flipPaper(el) {
+      const front = el.querySelector('#paperFront');
+      const back = el.querySelector('#paperBack');
+      if (front.style.display === 'none') {
+        front.style.display = 'block';
+        back.style.display = 'none';
+      } else {
+        front.style.display = 'none';
+        back.style.display = 'block';
+      }
+    }
+
+    function toggleEvidenceLocker() {
+      const drawer = document.getElementById('evidenceDrawer');
+      if (drawer) drawer.classList.toggle('open');
+    }
+
+    // Timer Functions
+    function formatTime(sec) {
+      const m = String(Math.floor(sec / 60)).padStart(2, '0');
+      const s = String(sec % 60).padStart(2, '0');
+      return `${m}:${s}`;
+    }
+
+    function startTimer() {
+      if (timerInterval) return;
+      timerInterval = setInterval(() => {
+        if (remainingSeconds > 0) {
+          remainingSeconds--;
+          const disp = document.getElementById('timerDisplay');
+          if (disp) disp.textContent = formatTime(remainingSeconds);
+        } else {
+          clearInterval(timerInterval);
+          timerInterval = null;
+          alert("Waktu penyelidikan untuk tahap ini telah habis! Segera kirimkan jawaban ke grup.");
+        }
+      }, 1000);
+    }
+
+    function pauseTimer() {
+      clearInterval(timerInterval);
+      timerInterval = null;
+    }
+
+    function resetTimer(min) {
+      pauseTimer();
+      remainingSeconds = min * 60;
+      const disp = document.getElementById('timerDisplay');
+      if (disp) disp.textContent = formatTime(remainingSeconds);
+    }
+
+    // Admin Functions
+    function renderAdminKeys() {
+      const container = document.getElementById('adminKeysList');
+      container.innerHTML = stagesData.map(s => `
+        <div class="witness-box">
+          <div class="witness-title">${s.code} — ${s.title} (Maks ${s.maxPoints} Poin)</div>
+          <p style="font-size: 0.92rem;"><strong>Kunci Admin:</strong> ${s.adminKey}</p>
+        </div>
+      `).join('');
+    }
+
+    function unlockAdmin() {
+      const val = document.getElementById('adminPinInput').value.trim().toUpperCase();
+      if (val === 'GEDUNG' || val === '001') {
+        document.getElementById('adminLockCard').style.display = 'none';
+        document.getElementById('adminContent').style.display = 'block';
+        document.getElementById('adminError').style.display = 'none';
+      } else {
+        document.getElementById('adminError').style.display = 'block';
+      }
+    }
+
+    function lockAdmin() {
+      document.getElementById('adminPinInput').value = '';
+      document.getElementById('adminLockCard').style.display = 'block';
+      document.getElementById('adminContent').style.display = 'none';
+    }
+
+    initApp();
+  </script>
+</body>
+</html>
